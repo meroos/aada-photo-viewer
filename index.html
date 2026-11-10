@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AADA Photo Viewer: stone artefacts (demo)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin="">
+<style>
+:root{--ink:#1f2328;--muted:#5d6670;--line:#d9dde1;--bg:#f6f5f2;--panel:#ffffff;--accent:#8a4b22;--accent2:#b8743f;--sel:#f1e4d8}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{height:52px;display:flex;align-items:center;gap:16px;padding:0 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+header h1{font-size:16px;margin:0;font-weight:600;white-space:nowrap}
+header h1 span{color:var(--muted);font-weight:400}
+.tabs{display:flex;gap:4px;margin-left:auto}
+.tabs button,.btn{border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit;color:var(--ink)}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn:hover,.tabs button:hover{border-color:var(--muted)}
+main{display:flex;height:calc(100% - 52px)}
+aside#filters{width:280px;flex:none;overflow:auto;padding:14px 16px;border-right:1px solid var(--line);background:var(--panel)}
+aside label.h{display:block;font-weight:600;margin:14px 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+aside input[type=search],aside select{width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:6px;font:inherit;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 9px;font:12px/1.4 inherit;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chips .grp{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+#count{margin-top:16px;padding:10px;background:var(--bg);border-radius:6px;font-size:13px}
+#count b{font-size:15px}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+.note a{color:var(--accent)}
+#views{flex:1;position:relative;min-width:0}
+#map{position:absolute;inset:0}
+#gallery{position:absolute;inset:0;overflow:auto;padding:16px;display:none}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
+.card:hover,.card:focus{border-color:var(--accent);outline:none}
+.card .ph{aspect-ratio:4/3;background:#e9e6e1 center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.card .cap{padding:7px 9px;font-size:12px}
+.card .cap b{display:block;font-size:13px}
+#pager{display:flex;gap:8px;align-items:center;justify-content:center;margin:18px 0 4px}
+#drawer{position:absolute;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(0,0,0,.08);display:none;flex-direction:column;z-index:1000}
+#drawer.open{display:flex}
+#dhead{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:10px}
+#dhead h2{font-size:16px;margin:0}
+#dhead .sub{color:var(--muted);font-size:13px}
+#dclose{margin-left:auto}
+#stage{position:relative;flex:1;min-height:200px;background:#2b2b2b;display:flex;align-items:center;justify-content:center}
+#stage img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;display:block}
+#stage .msg{color:#ddd;text-align:center;padding:20px;font-size:13px}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.85);font-size:20px;cursor:pointer}
+.nav:disabled{opacity:.3;cursor:default}
+#prev{left:10px}#next{right:10px}
+#pos{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:#eee;font-size:12px;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:999px}
+#caption{padding:12px 16px;border-top:1px solid var(--line);font-size:13px;max-height:38%;overflow:auto}
+#caption h3{margin:0 0 4px;font-size:15px}
+#caption dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0 0}
+#caption dt{color:var(--muted)}
+#caption dd{margin:0}
+#strip{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;border-top:1px solid var(--line)}
+#strip button{flex:none;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 8px;font:12px/1.3 inherit;cursor:pointer;white-space:nowrap}
+#strip button[aria-current="true"]{background:var(--sel);border-color:var(--accent)}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:3000;display:none;overflow:auto;cursor:zoom-out}
+#lightbox.open{display:block}
+#lightbox img{display:block;margin:auto;max-width:none}
+#lightbox.fit img{max-width:100vw;max-height:100vh;position:absolute;inset:0;margin:auto}
+#lbhint{position:fixed;top:10px;left:50%;transform:translateX(-50%);color:#ccc;font-size:12px;z-index:3001;pointer-events:none}
+#about{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:4000;display:none;align-items:center;justify-content:center}
+#about.open{display:flex}
+#about .box{background:#fff;max-width:620px;margin:16px;padding:22px 26px;border-radius:10px;max-height:85vh;overflow:auto}
+#about h2{margin-top:0;font-size:18px}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:6px;font-size:13px;z-index:5000;display:none}
+.spin{width:28px;height:28px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:s 1s linear infinite;margin:0 auto 8px}
+@keyframes s{to{transform:rotate(360deg)}}
+.leaflet-popup-content{margin:10px 12px;font-size:13px}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:rgba(138,75,34,.85);color:#fff}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(184,116,63,.35)}
+@media (max-width:760px){
+ aside#filters{position:absolute;z-index:1500;height:calc(100% - 52px);transform:translateX(-100%);transition:transform .2s}
+ aside#filters.show{transform:none}
+ #ftoggle{display:inline-block!important}
+ header h1 span{display:none}
+}
+#ftoggle{display:none}
+</style>
+</head>
+<body>
+<header>
+  <button class="btn" id="ftoggle" aria-controls="filters">Filters</button>
+  <h1>AADA Photo Viewer <span>· stone artefacts · demo</span></h1>
+  <div class="tabs" role="group" aria-label="View">
+    <button id="tabMap" aria-pressed="true">Map</button>
+    <button id="tabGal" aria-pressed="false">Gallery</button>
+    <button id="tabAbout" aria-pressed="false">About</button>
+  </div>
+</header>
+<main>
+  <aside id="filters">
+    <label class="h" for="q">Search</label>
+    <input type="search" id="q" placeholder="KM number, type, site, municipality…" autocomplete="off">
+    <label class="h" for="type">Artefact type</label>
+    <select id="type"><option value="">All types</option></select>
+    <label class="h" for="subtype">Subtype</label>
+    <select id="subtype"><option value="">All subtypes</option></select>
+    <label class="h">Subperiod</label>
+    <div class="chips" id="periods"></div>
+    <div id="count">Loading data…</div>
+    <button class="btn" id="reset" style="margin-top:10px;width:100%">Reset filters</button>
+    <p class="note">Photographs are read directly from the published Zenodo deposit; each opens after a short download. <a href="#" id="aboutLink">About this demo</a></p>
+  </aside>
+  <section id="views">
+    <div id="map" role="region" aria-label="Map of findspots"></div>
+    <div id="gallery" role="region" aria-label="Photo gallery">
+      <div id="grid"></div>
+      <div id="pager"><button class="btn" id="pgPrev">Previous</button><span id="pgInfo"></span><button class="btn" id="pgNext">Next</button></div>
+    </div>
+    <div id="drawer" role="dialog" aria-label="Finds and photographs">
+      <div id="dhead"><div><h2 id="dtitle"></h2><div class="sub" id="dsub"></div></div><button class="btn" id="dclose" aria-label="Close">Close</button></div>
+      <div id="stage"><button class="nav" id="prev" aria-label="Previous photo">‹</button><div class="msg" id="smsg"></div><img id="simg" alt="" hidden><button class="nav" id="next" aria-label="Next photo">›</button><span id="pos"></span></div>
+      <div id="caption"></div>
+      <div id="strip" aria-label="Finds at this location"></div>
+    </div>
+  </section>
+</main>
+<div id="lightbox" class="fit"><img id="lbimg" alt=""></div>
+<div id="lbhint" hidden>Click to switch between fit and full size · Esc to close</div>
+<div id="about" role="dialog" aria-modal="true" aria-label="About"><div class="box">
+  <h2>About this demo</h2>
+  <p>This page shows stone artefacts from the Archaeological Artefact Database of Finland (AADA) that have a published photograph. Finds come from a snapshot of the AADA layer on the University of Turku GeoNode (geodata.utu.fi, taken on 10 November 2026). Photographs are read on demand from the AADA photo deposit on Zenodo: the page requests only the bytes of the chosen photo from inside the published zip archives, so no copy of the photographs is hosted here.</p>
+  <p><b>Cite the data:</b> Pesonen, P., Moilanen, U., Roose, M., Saipio, J., Tiilikkala, J., Sanwal, U., Immonen, V., Vesakoski, O. &amp; Onkamo, P. 2024. Archaeological Artefact Database of Finland (AADA). <i>Scientific Data</i> 11, 815. <a href="https://doi.org/10.1038/s41597-024-03602-8" target="_blank" rel="noopener">doi:10.1038/s41597-024-03602-8</a></p>
+  <p><b>Photographs:</b> AADA Photographs, Zenodo, <a href="https://doi.org/10.5281/zenodo.11256533" target="_blank" rel="noopener">doi:10.5281/zenodo.11256533</a>. Licence as stated in the deposit: CC BY 4.0.</p>
+  <p><b>Limitations:</b> photographs are full resolution (typically about 0.5 MB), so each takes a moment to load. Only stone artefacts are included in this demo. Raw-material names are given in Finnish as recorded in AADA.</p>
+  <p><button class="btn" id="aboutClose">Close</button></p>
+</div></div>
+<div id="toast" role="status"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script>
+"use strict";
+const ZENODO = "https://zenodo.org/api/records/11256533/files/";
+const PERIODS = [
+  {g:"Mesolithic", items:["M1","M2","M3"]},
+  {g:"Neolithic", items:["N1","N2","N3","N4"]},
+  {g:"Bronze Age", items:["P1","P2"]},
+  {g:"Iron Age", items:["R1","R2"]}
+];
+const PCODES = ["M1","M2","M3","N1","N2","N3","N4","P1","P2","R1","R2"];
+const ERAS = ["Stone Age","Bronze Age","Iron Age"];
+let D, map, cluster;
+const state = {q:"", type:"", subtype:"", periods:new Set(), view:"map", page:0};
+let filtered = [];          // find indices
+let drawer = {list:[], i:0, title:""};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(t, ms=4000){const e=$("toast"); e.textContent=t; e.style.display="block"; clearTimeout(toast.h); toast.h=setTimeout(()=>e.style.display="none", ms);}
+
+/* ---------- Photo access: byte-range reads from the Zenodo zips ---------- */
+const full = new Map();   // photo index -> object URL (LRU)
+const thumbs = new Map(); // photo index -> object URL
+const pending = new Map();
+const queue = []; let active = 0; const MAXACTIVE = 3;
+let pausedUntil = 0;
+function schedule(fn){ return new Promise((res, rej) => { queue.push({fn,res,rej}); pump(); }); }
+function pump(){
+  while (active < MAXACTIVE && queue.length){
+    const wait = pausedUntil - Date.now();
+    if (wait > 0){ setTimeout(pump, wait + 50); return; }
+    const job = queue.shift(); active++;
+    job.fn().then(job.res, job.rej).finally(() => { active--; pump(); });
+  }
+}
+async function rangeFetch(url, a, b){
+  for (let attempt = 0; attempt < 3; attempt++){
+    const r = await fetch(url, {headers:{Range:`bytes=${a}-${b}`}});
+    if (r.status === 206) return new Uint8Array(await r.arrayBuffer());
+    if (r.status === 429){
+      pausedUntil = Date.now() + 61000;
+      toast("Zenodo's request limit was reached; photos resume in about a minute.", 8000);
+      await new Promise(s => setTimeout(s, 61000)); continue;
+    }
+    if (r.status === 200) throw new Error("The server ignored the byte-range request.");
+    throw new Error("Zenodo answered with status " + r.status + ".");
+  }
+  throw new Error("Zenodo did not answer after several attempts.");
+}
+async function readPhoto(pi){
+  const [zi, off, csize, size, name] = D.photos[pi];
+  const url = ZENODO + encodeURIComponent(D.zips[zi]) + "/content";
+  let head = 30 + 3 * name.length + 256;
+  let buf = await rangeFetch(url, off, off + head + csize);
+  const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+  if (dv.getUint32(0, true) !== 0x04034b50) throw new Error("Unexpected archive structure.");
+  const method = dv.getUint16(8, true);
+  const start = 30 + dv.getUint16(26, true) + dv.getUint16(28, true);
+  if (start + csize > buf.length) buf = await rangeFetch(url, off, off + start + csize + 16);
+  let data = new Blob([buf.subarray(start, start + csize)]);
+  if (method === 8) data = await new Response(data.stream().pipeThrough(new DecompressionStream("deflate-raw"))).blob();
+  else if (method !== 0) throw new Error("Unsupported compression method " + method + ".");
+  return new Blob([data], {type:"image/jpeg"});
+}
+function getFull(pi){
+  if (full.has(pi)){ const u = full.get(pi); full.delete(pi); full.set(pi, u); return Promise.resolve(u); }
+  const key = "f" + pi;
+  if (pending.has(key)) return pending.get(key);
+  const p = schedule(() => readPhoto(pi)).then(async blob => {
+    const u = URL.createObjectURL(blob); full.set(pi, u);
+    if (full.size > 40){ const [k, v] = full.entries().next().value; full.delete(k); URL.revokeObjectURL(v); }
+    if (!thumbs.has(pi)) makeThumb(blob).then(t => { if (t) thumbs.set(pi, URL.createObjectURL(t)); });
+    return u;
+  }).finally(() => pending.delete(key));
+  pending.set(key, p); return p;
+}
+async function makeThumb(blob){
+  try{
+    const bmp = await createImageBitmap(blob, {resizeWidth:340, resizeQuality:"medium"});
+    const c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
+    c.getContext("2d").drawImage(bmp, 0, 0); bmp.close && bmp.close();
+    return await new Promise(r => c.toBlob(r, "image/jpeg", 0.8));
+  }catch(e){ return null; }
+}
+function getThumb(pi){
+  if (thumbs.has(pi)) return Promise.resolve(thumbs.get(pi));
+  const key = "t" + pi;
+  if (pending.has(key)) return pending.get(key);
+  const p = schedule(() => readPhoto(pi)).then(async blob => {
+    const t = await makeThumb(blob); const u = URL.createObjectURL(t || blob); thumbs.set(pi, u); return u;
+  }).finally(() => pending.delete(key));
+  pending.set(key, p); return p;
+}
+
+/* ---------- Data helpers ---------- */
+const F = i => D.finds[i];   // [site, type, subtype, label, material, era, mask, dims, photos]
+function periodsOf(mask){ return PCODES.filter((c, k) => mask & (1 << k)); }
+function matches(i){
+  const f = F(i);
+  if (state.type !== "" && f[1] !== +state.type) return false;
+  if (state.subtype !== "" && f[2] !== +state.subtype) return false;
+  if (state.periods.size){
+    let ok = false; for (const k of state.periods){ if (f[6] & (1 << k)){ ok = true; break; } }
+    if (!ok) return false;
+  }
+  if (state.q){
+    const s = D.sites[f[0]];
+    const hay = (f[3] + " " + D.types[f[1]] + " " + D.subtypes[f[2]] + " " + D.materials[f[4]] + " " + s[0] + " " + s[1]).toLowerCase();
+    for (const w of state.q.toLowerCase().split(/\s+/)) if (w && !hay.includes(w)) return false;
+  }
+  return true;
+}
+
+/* ---------- Filters ---------- */
+function buildFilters(){
+  const tc = new Map(); D.finds.forEach(f => tc.set(f[1], (tc.get(f[1]) || 0) + 1));
+  [...tc.entries()].sort((a, b) => D.types[a[0]].localeCompare(D.types[b[0]])).forEach(([t, n]) => {
+    const o = document.createElement("option"); o.value = t; o.textContent = `${D.types[t]} (${n})`; $("type").appendChild(o);
+  });
+  const pc = $("periods");
+  PERIODS.forEach(g => {
+    const h = document.createElement("div"); h.className = "grp"; h.textContent = g.g; pc.appendChild(h);
+    g.items.forEach(code => {
+      const k = PCODES.indexOf(code);
+      const b = document.createElement("button"); b.textContent = code; b.setAttribute("aria-pressed", "false");
+      b.title = `${g.g}, subperiod ${code}`;
+      b.onclick = () => { state.periods.has(k) ? state.periods.delete(k) : state.periods.add(k); b.setAttribute("aria-pressed", state.periods.has(k)); apply(); };
+      pc.appendChild(b);
+    });
+  });
+  let t; $("q").addEventListener("input", e => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value.trim(); apply(); }, 250); });
+  $("type").onchange = e => { state.type = e.target.value; state.subtype = ""; fillSubtypes(); apply(); };
+  $("subtype").onchange = e => { state.subtype = e.target.value; apply(); };
+  $("reset").onclick = () => {
+    state.q = ""; state.type = ""; state.subtype = ""; state.periods.clear();
+    $("q").value = ""; $("type").value = ""; fillSubtypes();
+    document.querySelectorAll("#periods button").forEach(b => b.setAttribute("aria-pressed", "false")); apply();
+  };
+  fillSubtypes();
+}
+function fillSubtypes(){
+  const sel = $("subtype"); sel.innerHTML = '<option value="">All subtypes</option>';
+  const sc = new Map();
+  D.finds.forEach(f => { if (state.type === "" || f[1] === +state.type) sc.set(f[2], (sc.get(f[2]) || 0) + 1); });
+  [...sc.entries()].filter(([s]) => D.subtypes[s]).sort((a, b) => D.subtypes[a[0]].localeCompare(D.subtypes[b[0]])).forEach(([s, n]) => {
+    const o = document.createElement("option"); o.value = s; o.textContent = `${D.subtypes[s]} (${n})`; sel.appendChild(o);
+  });
+  sel.disabled = sc.size < 2;
+}
+
+/* ---------- Map ---------- */
+function initMap(){
+  map = L.map("map", {preferCanvas:true, zoomControl:true}).setView([64.2, 25.5], 5);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    maxZoom:18, subdomains:"abcd",
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a> · Finds: AADA'
+  }).addTo(map);
+  cluster = L.markerClusterGroup({chunkedLoading:true, showCoverageOnHover:false, maxClusterRadius:50});
+  map.addLayer(cluster);
+}
+function drawMap(){
+  cluster.clearLayers();
+  const bySite = new Map();
+  filtered.forEach(i => { const s = F(i)[0]; if (!bySite.has(s)) bySite.set(s, []); bySite.get(s).push(i); });
+  const markers = [];
+  bySite.forEach((list, s) => {
+    const [name, muni, lat, lon] = D.sites[s];
+    const m = L.circleMarker([lat, lon], {radius:Math.min(4 + Math.sqrt(list.length) * 1.6, 14), color:"#5a2f14", weight:1, fillColor:"#b8743f", fillOpacity:.85});
+    m.bindTooltip(`${esc(name || "Unnamed site")}, ${esc(muni)} · ${list.length} find${list.length > 1 ? "s" : ""}`);
+    m.on("click", () => openDrawer(list, name || "Unnamed site", `${muni} · ${list.length} find${list.length > 1 ? "s" : ""} with photographs`));
+    markers.push(m);
+  });
+  cluster.addLayers(markers);
+  return bySite.size;
+}
+
+/* ---------- Gallery ---------- */
+const PAGE = 24; let observer;
+function drawGallery(){
+  const g = $("grid"); g.innerHTML = "";
+  const pages = Math.max(1, Math.ceil(filtered.length / PAGE));
+  state.page = Math.min(state.page, pages - 1);
+  const slice = filtered.slice(state.page * PAGE, state.page * PAGE + PAGE);
+  if (observer) observer.disconnect();
+  observer = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; observer.unobserve(e.target);
+    const ph = e.target, pi = +ph.dataset.pi;
+    getThumb(pi).then(u => { ph.style.backgroundImage = `url("${u}")`; ph.textContent = ""; })
+      .catch(() => { ph.textContent = "Photo unavailable"; });
+  }), {root:$("gallery"), rootMargin:"200px"});
+  slice.forEach((i, k) => {
+    const f = F(i), s = D.sites[f[0]];
+    const c = document.createElement("div"); c.className = "card"; c.tabIndex = 0;
+    c.innerHTML = `<div class="ph" data-pi="${f[8][0]}">Loading…</div><div class="cap"><b>${esc(f[3])}</b>${esc(D.subtypes[f[2]] || D.types[f[1]])}<br><span style="color:var(--muted)">${esc(s[1])}</span></div>`;
+    const open = () => openDrawer(filtered, "Gallery", `${filtered.length.toLocaleString("en-GB")} finds in the current selection`, state.page * PAGE + k);
+    c.onclick = open; c.onkeydown = e => { if (e.key === "Enter") open(); };
+    g.appendChild(c); observer.observe(c.firstChild);
+  });
+  $("pgInfo").textContent = `Page ${state.page + 1} of ${pages.toLocaleString("en-GB")}`;
+  $("pgPrev").disabled = state.page === 0; $("pgNext").disabled = state.page >= pages - 1;
+}
+$("pgPrev").onclick = () => { state.page--; drawGallery(); $("gallery").scrollTop = 0; };
+$("pgNext").onclick = () => { state.page++; drawGallery(); $("gallery").scrollTop = 0; };
+
+/* ---------- Drawer / carousel ---------- */
+function openDrawer(list, title, sub, start = 0){
+  drawer = {list, i:start, sub:0};
+  $("dtitle").textContent = title; $("dsub").textContent = sub;
+  $("drawer").classList.add("open");
+  buildStrip(); show();
+}
+function closeDrawer(){ $("drawer").classList.remove("open"); history.replaceState(null, "", location.pathname); }
+function buildStrip(){
+  const st = $("strip"); st.innerHTML = "";
+  if (drawer.list.length > 300 || drawer.list.length < 2){ st.style.display = "none"; return; }
+  st.style.display = "flex";
+  drawer.list.forEach((i, k) => {
+    const b = document.createElement("button"); b.textContent = F(i)[3];
+    b.onclick = () => { drawer.i = k; drawer.sub = 0; show(); }; st.appendChild(b);
+  });
+}
+function currentPhotos(){ return F(drawer.list[drawer.i])[8]; }
+let showToken = 0;
+async function show(){
+  const tok = ++showToken;
+  const fi = drawer.list[drawer.i], f = F(fi), s = D.sites[f[0]];
+  const photos = f[8], pi = photos[drawer.sub];
+  const total = drawer.list.length;
+  $("pos").textContent = `${(drawer.i + 1).toLocaleString("en-GB")} / ${total.toLocaleString("en-GB")}` + (photos.length > 1 ? ` · photo ${drawer.sub + 1} of ${photos.length}` : "");
+  $("prev").disabled = drawer.i === 0 && drawer.sub === 0;
+  $("next").disabled = drawer.i === total - 1 && drawer.sub === photos.length - 1;
+  const per = periodsOf(f[6]);
+  $("caption").innerHTML = `<h3>${esc(f[3])}</h3>
+    <div>${esc(D.types[f[1]])}${D.subtypes[f[2]] && D.subtypes[f[2]] !== D.types[f[1]] ? " · " + esc(D.subtypes[f[2]]) : ""}</div>
+    <dl>
+      <dt>Site</dt><dd>${esc(s[0] || "Unnamed site")}, ${esc(s[1])}</dd>
+      <dt>Dating</dt><dd>${esc(ERAS[f[5]])}${per.length ? " · " + per.join(", ") : " · subperiod not given"}</dd>
+      ${D.materials[f[4]] ? `<dt>Raw material</dt><dd>${esc(D.materials[f[4]])} <span style="color:var(--muted)">(Finnish, as recorded)</span></dd>` : ""}
+      ${f[7] ? `<dt>Size (L×W×T)</dt><dd>${esc(f[7])} mm</dd>` : ""}
+      <dt>Photograph</dt><dd>${esc(D.photos[pi][4])} · <a href="https://doi.org/10.5281/zenodo.11256533" target="_blank" rel="noopener">AADA Photographs, Zenodo</a></dd>
+    </dl>`;
+  document.querySelectorAll("#strip button").forEach((b, k) => { const on = k === drawer.i; b.setAttribute("aria-current", on); if (on) b.scrollIntoView({block:"nearest", inline:"nearest"}); });
+  history.replaceState(null, "", "?find=" + encodeURIComponent(f[3]));
+  const img = $("simg"), msg = $("smsg");
+  img.hidden = true;
+  msg.innerHTML = '<div class="spin"></div>Loading photograph from Zenodo…'; msg.hidden = false;
+  try{
+    const u = await getFull(pi);
+    if (tok !== showToken) return;
+    img.src = u; img.alt = `${f[3]}, ${D.types[f[1]]}`; img.hidden = false; msg.hidden = true;
+    prefetch();
+  }catch(e){
+    if (tok !== showToken) return;
+    msg.innerHTML = `The photograph could not be loaded.<br><small>${esc(e.message)}</small>`;
+    console.error(e);
+  }
+}
+function prefetch(){
+  const f = F(drawer.list[drawer.i]);
+  if (drawer.sub + 1 < f[8].length) getFull(f[8][drawer.sub + 1]).catch(() => {});
+  else if (drawer.i + 1 < drawer.list.length) getFull(F(drawer.list[drawer.i + 1])[8][0]).catch(() => {});
+}
+function step(d){
+  const n = currentPhotos().length;
+  if (d > 0){
+    if (drawer.sub + 1 < n) drawer.sub++;
+    else if (drawer.i + 1 < drawer.list.length){ drawer.i++; drawer.sub = 0; } else return;
+  } else {
+    if (drawer.sub > 0) drawer.sub--;
+    else if (drawer.i > 0){ drawer.i--; drawer.sub = F(drawer.list[drawer.i])[8].length - 1; } else return;
+  }
+  show();
+}
+$("prev").onclick = () => step(-1); $("next").onclick = () => step(1); $("dclose").onclick = closeDrawer;
+let tx = null;
+$("stage").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, {passive:true});
+$("stage").addEventListener("touchend", e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1); tx = null; });
+$("simg").onclick = () => { $("lbimg").src = $("simg").src; $("lbimg").alt = $("simg").alt; $("lightbox").className = "open fit"; $("lbhint").hidden = false; };
+$("lightbox").onclick = e => {
+  const lb = $("lightbox");
+  if (lb.classList.contains("fit")) lb.classList.remove("fit"); else { lb.classList.remove("open"); $("lbhint").hidden = true; }
+};
+document.addEventListener("keydown", e => {
+  if ($("lightbox").classList.contains("open")){ if (e.key === "Escape"){ $("lightbox").classList.remove("open"); $("lbhint").hidden = true; } return; }
+  if ($("about").classList.contains("open")){ if (e.key === "Escape") $("about").classList.remove("open"); return; }
+  if (!$("drawer").classList.contains("open") || e.target.tagName === "INPUT") return;
+  if (e.key === "ArrowRight") step(1); else if (e.key === "ArrowLeft") step(-1); else if (e.key === "Escape") closeDrawer();
+});
+
+/* ---------- Views ---------- */
+function setView(v){
+  state.view = v;
+  $("tabMap").setAttribute("aria-pressed", v === "map"); $("tabGal").setAttribute("aria-pressed", v === "gallery");
+  $("map").style.display = v === "map" ? "block" : "none"; $("gallery").style.display = v === "gallery" ? "block" : "none";
+  if (v === "map") map.invalidateSize(); else drawGallery();
+}
+$("tabMap").onclick = () => setView("map"); $("tabGal").onclick = () => setView("gallery");
+const openAbout = e => { e && e.preventDefault(); $("about").classList.add("open"); };
+$("tabAbout").onclick = openAbout; $("aboutLink").onclick = openAbout;
+$("aboutClose").onclick = () => $("about").classList.remove("open");
+$("about").onclick = e => { if (e.target.id === "about") $("about").classList.remove("open"); };
+$("ftoggle").onclick = () => $("filters").classList.toggle("show");
+
+function apply(){
+  filtered = []; for (let i = 0; i < D.finds.length; i++) if (matches(i)) filtered.push(i);
+  const sites = drawMap(); state.page = 0;
+  $("count").innerHTML = `<b>${filtered.length.toLocaleString("en-GB")}</b> finds with photographs<br>at <b>${sites.toLocaleString("en-GB")}</b> findspots`;
+  if (state.view === "gallery") drawGallery();
+}
+
+/* ---------- Start ---------- */
+(async () => {
+  if (!("DecompressionStream" in window)){ $("count").textContent = "This browser is too old to open the photographs. Please use a current version of Chrome, Firefox, Safari or Edge."; }
+  initMap();
+  try{
+    D = await (await fetch("data.json")).json();
+  }catch(e){ $("count").textContent = "The data file could not be loaded."; return; }
+  buildFilters(); apply();
+  const want = new URLSearchParams(location.search).get("find");
+  if (want){
+    const i = D.finds.findIndex(f => f[3].toLowerCase() === want.toLowerCase());
+    if (i >= 0){ const s = D.sites[F(i)[0]]; map.setView([s[2], s[3]], 11); const list = filtered.filter(j => F(j)[0] === F(i)[0]);
+      openDrawer(list, s[0] || "Unnamed site", `${s[1]} · ${list.length} finds with photographs`, Math.max(0, list.indexOf(i))); }
+    else toast("No stone artefact with the number " + want + " has a photograph in this demo.");
+  }
+})();
+</script>
+</body>
+</html>

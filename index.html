@@ -289,9 +289,9 @@ function fillSubtypes(){
 /* ---------- Map ---------- */
 function initMap(){
   map = L.map("map", {preferCanvas:true, zoomControl:true}).setView([64.2, 25.5], 5);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    maxZoom:18, subdomains:"abcd",
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a> · Finds: AADA'
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom:19,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · Finds: AADA'
   }).addTo(map);
   cluster = L.markerClusterGroup({chunkedLoading:true, showCoverageOnHover:false, maxClusterRadius:50});
   map.addLayer(cluster);
@@ -453,6 +453,11 @@ function apply(){
   try{
     D = await (await fetch("data.json")).json();
   }catch(e){ $("count").textContent = "The data file could not be loaded."; return; }
+  // Label each find from its photo name (collection main_sub), which carries the subnumber reliably
+  D.finds.forEach(f => {
+    const n = D.photos[f[8][0]][4].replace(/\.jpe?g$/i, "");
+    f[3] = n.replace(/_(\d+)[a-z]?$/i, ":$1").replace(/^([A-Za-zÅÄÖåäö]+)(\d)/, "$1 $2");
+  });
   buildFilters(); apply();
   const want = new URLSearchParams(location.search).get("find");
   if (want){

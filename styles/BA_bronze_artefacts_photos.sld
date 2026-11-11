@@ -511,7 +511,7 @@
         <sld:Rule>
           <sld:Name>Photograph (selection)</sld:Name>
           <sld:MinScaleDenominator>100000</sld:MinScaleDenominator>
-          <sld:MaxScaleDenominator>650000</sld:MaxScaleDenominator>
+          <sld:MaxScaleDenominator>1300000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>
             <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
             <sld:Font>

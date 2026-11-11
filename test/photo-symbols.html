@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AADA photo symbols: GeoServer test</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+html,body,#map{margin:0;height:100%;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#info{position:absolute;z-index:1000;top:10px;right:10px;background:#fff;border:1px solid #ccc;border-radius:6px;padding:8px 12px;max-width:300px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#info b{font-size:15px}
+#info .muted{color:#666;font-size:12px}
+#busy{display:none;color:#8a4b22}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info">
+  <b>AADA photo symbols (test)</b><br>
+  Stone Age stone artefacts, drawn by GeoServer (geodata.utu.fi) with the test style <code>aada_photo_symbols_test</code>.<br>
+  <span class="muted">Clusters above 1:150 000 · type symbols 1:150 000–1:50 000 · photographs below 1:50 000. Thumbnails are uploaded only for the Salo area so far.</span><br>
+  Current scale: <b id="scale">–</b> <span id="busy">· drawing…</span><br>
+  <button id="salo">Zoom to Salo test area</button>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+const WMS = "https://geodata.utu.fi/geoserver/wms";
+const map = L.map("map").setView([64.2, 25.5], 5);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · AADA layer: UTU GeoServer'}).addTo(map);
+let overlay = null, token = 0;
+function refresh(){
+  const b = map.getBounds(), size = map.getSize();
+  const sw = L.CRS.EPSG3857.project(b.getSouthWest()), ne = L.CRS.EPSG3857.project(b.getNorthEast());
+  const scale = (ne.x - sw.x) / (size.x * 0.00028);
+  document.getElementById("scale").textContent = "1:" + Math.round(scale).toLocaleString("en-GB");
+  const p = new URLSearchParams({service:"WMS", version:"1.1.1", request:"GetMap", layers:"geonode:aada_stone_artefacts_stone_age",
+    styles:"aada_photo_symbols_test", srs:"EPSG:3857", bbox:[sw.x, sw.y, ne.x, ne.y].join(","), width:size.x, height:size.y,
+    format:"image/png", transparent:"true"});
+  const url = WMS + "?" + p.toString(), my = ++token;
+  document.getElementById("busy").style.display = "inline";
+  const img = new Image();
+  img.onload = () => {
+    if (my !== token) return;
+    const next = L.imageOverlay(url, b, {opacity:1}).addTo(map);
+    if (overlay) map.removeLayer(overlay);
+    overlay = next;
+    document.getElementById("busy").style.display = "none";
+  };
+  img.onerror = () => { if (my === token) document.getElementById("busy").textContent = "· GeoServer did not return an image"; };
+  img.src = url;
+}
+map.on("moveend", refresh);
+document.getElementById("salo").onclick = () => map.setView([60.331, 23.165], 13);
+refresh();
+</script>
+</body>
+</html>

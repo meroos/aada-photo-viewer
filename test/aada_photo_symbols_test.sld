@@ -595,6 +595,11 @@
                 <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="aada_thumbs/${collection}_${numberFormat('0',parseDouble(main_number))}_${numberFormat('0',parseDouble(subnumber))}.jpg"/>
                 <sld:Format>image/jpeg</sld:Format>
               </sld:ExternalGraphic>
+              <sld:Mark>
+                <sld:WellKnownName>circle</sld:WellKnownName>
+                <sld:Fill><sld:CssParameter name="fill-opacity">0</sld:CssParameter></sld:Fill>
+                <sld:Stroke><sld:CssParameter name="stroke-opacity">0</sld:CssParameter></sld:Stroke>
+              </sld:Mark>
               <sld:Size>44</sld:Size>
             </sld:Graphic>
           </sld:PointSymbolizer>

@@ -11,7 +11,8 @@
   ],
   "has_stacker": true,
   "len": 25972,
-  "new_style": "AADA_IA_clay_artefacts_photos"
+  "new_style": "AADA_IA_clay_artefacts_photos",
+  "card_style": "AADA_IA_clay_artefacts_photocards"
  },
  {
   "pk": "992",
@@ -23,7 +24,8 @@
   "frag": [],
   "has_stacker": true,
   "len": 13158,
-  "new_style": "AADA_IA_pottery_detailed_photos"
+  "new_style": "AADA_IA_pottery_detailed_photos",
+  "card_style": "AADA_IA_pottery_detailed_photocards"
  },
  {
   "pk": "990",
@@ -37,7 +39,8 @@
   ],
   "has_stacker": true,
   "len": 22433,
-  "new_style": "AADA_IA_silver_gold_artefacts_photos"
+  "new_style": "AADA_IA_silver_gold_artefacts_photos",
+  "card_style": "AADA_IA_silver_gold_artefacts_photocards"
  },
  {
   "pk": "989",
@@ -51,7 +54,8 @@
   ],
   "has_stacker": true,
   "len": 22459,
-  "new_style": "AADA_IA_beads_photos"
+  "new_style": "AADA_IA_beads_photos",
+  "card_style": "AADA_IA_beads_photocards"
  },
  {
   "pk": "988",
@@ -65,7 +69,8 @@
   ],
   "has_stacker": true,
   "len": 22454,
-  "new_style": "AADA_IA_iron_artefacts_photos"
+  "new_style": "AADA_IA_iron_artefacts_photos",
+  "card_style": "AADA_IA_iron_artefacts_photocards"
  },
  {
   "pk": "987",
@@ -79,7 +84,8 @@
   ],
   "has_stacker": true,
   "len": 25875,
-  "new_style": "AADA_IA_bronze_artefacts_photos"
+  "new_style": "AADA_IA_bronze_artefacts_photos",
+  "card_style": "AADA_IA_bronze_artefacts_photocards"
  },
  {
   "pk": "986",
@@ -93,7 +99,8 @@
   ],
   "has_stacker": true,
   "len": 22498,
-  "new_style": "AADA_IA_bone_artefacts_photos"
+  "new_style": "AADA_IA_bone_artefacts_photos",
+  "card_style": "AADA_IA_bone_artefacts_photocards"
  },
  {
   "pk": "606",
@@ -107,7 +114,8 @@
   ],
   "has_stacker": true,
   "len": 13162,
-  "new_style": "IA_stone_tools_artefacts_photos"
+  "new_style": "IA_stone_tools_artefacts_photos",
+  "card_style": "IA_stone_tools_artefacts_photocards"
  },
  {
   "pk": "790",
@@ -121,7 +129,8 @@
   ],
   "has_stacker": true,
   "len": 14533,
-  "new_style": "BA_stone_tools_artefacts_photos"
+  "new_style": "BA_stone_tools_artefacts_photos",
+  "card_style": "BA_stone_tools_artefacts_photocards"
  },
  {
   "pk": "792",
@@ -136,7 +145,8 @@
   ],
   "has_stacker": true,
   "len": 11754,
-  "new_style": "BA_bone_artefacts_photos"
+  "new_style": "BA_bone_artefacts_photos",
+  "card_style": "BA_bone_artefacts_photocards"
  },
  {
   "pk": "791",
@@ -151,7 +161,8 @@
   ],
   "has_stacker": true,
   "len": 11736,
-  "new_style": "BA_clay_artefacts_photos"
+  "new_style": "BA_clay_artefacts_photos",
+  "card_style": "BA_clay_artefacts_photocards"
  },
  {
   "pk": "771",
@@ -166,7 +177,8 @@
   ],
   "has_stacker": true,
   "len": 27020,
-  "new_style": "BA_bronze_artefacts_photos"
+  "new_style": "BA_bronze_artefacts_photos",
+  "card_style": "BA_bronze_artefacts_photocards"
  },
  {
   "pk": "994",
@@ -178,7 +190,8 @@
   "frag": [],
   "has_stacker": true,
   "len": 22468,
-  "new_style": "AADA_SA_wooden_artefacts_photos"
+  "new_style": "AADA_SA_wooden_artefacts_photos",
+  "card_style": "AADA_SA_wooden_artefacts_photocards"
  },
  {
   "pk": "979",
@@ -192,7 +205,8 @@
   ],
   "has_stacker": true,
   "len": 31272,
-  "new_style": "SA_stonetools_artefacts_photos"
+  "new_style": "SA_stonetools_artefacts_photos",
+  "card_style": "SA_stonetools_artefacts_photocards"
  },
  {
   "pk": "978",
@@ -204,7 +218,8 @@
   "frag": [],
   "has_stacker": true,
   "len": 31287,
-  "new_style": "SA_pottery_artefacts_photos"
+  "new_style": "SA_pottery_artefacts_photos",
+  "card_style": "SA_pottery_artefacts_photocards"
  },
  {
   "pk": "796",
@@ -219,7 +234,8 @@
   ],
   "has_stacker": true,
   "len": 13145,
-  "new_style": "SA_birchbark_artefacts_photos"
+  "new_style": "SA_birchbark_artefacts_photos",
+  "card_style": "SA_birchbark_artefacts_photocards"
  },
  {
   "pk": "797",
@@ -234,7 +250,8 @@
   ],
   "has_stacker": true,
   "len": 29685,
-  "new_style": "SA_bone_artefacts_photos"
+  "new_style": "SA_bone_artefacts_photos",
+  "card_style": "SA_bone_artefacts_photocards"
  },
  {
   "pk": "800",
@@ -249,7 +266,8 @@
   ],
   "has_stacker": true,
   "len": 13131,
-  "new_style": "SA_clay_artefacts_photos"
+  "new_style": "SA_clay_artefacts_photos",
+  "card_style": "SA_clay_artefacts_photocards"
  },
  {
   "pk": "795",
@@ -264,6 +282,7 @@
   ],
   "has_stacker": true,
   "len": 21493,
-  "new_style": "SA_amber_artefacts_photos"
+  "new_style": "SA_amber_artefacts_photos",
+  "card_style": "SA_amber_artefacts_photocards"
  }
 ]

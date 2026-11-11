@@ -588,7 +588,7 @@
         <sld:Name>photos</sld:Name>
         <sld:Rule>
           <sld:Name>Photograph</sld:Name>
-          <sld:MaxScaleDenominator>600000</sld:MaxScaleDenominator>
+          <sld:MaxScaleDenominator>650000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>
             <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
             <sld:Font>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+    <sld:NamedLayer>
+        <sld:Name>geonode:stone_age_amber_artefacts_190ad0161c981bc9ce4a55730efe29a6</sld:Name>
+        <sld:UserStyle>
+            <sld:Name>SA_amber_artefacts_photos</sld:Name>
+            
+            <sld:FeatureTypeStyle>
+                <sld:Name>name</sld:Name>
+                <sld:Transformation>
+                    <ogc:Function name="gs:PointStacker">
+                        <ogc:Function name="parameter">
+                            <ogc:Literal>data</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Function name="parameter">
+                            <ogc:Literal>cellSize</ogc:Literal>
+                            <ogc:Literal>30</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Function name="parameter">
+                            <ogc:Literal>outputBBOX</ogc:Literal>
+                            <ogc:Function name="env">
+                                <ogc:Literal>wms_bbox</ogc:Literal>
+                            </ogc:Function>
+                        </ogc:Function>
+                        <ogc:Function name="parameter">
+                            <ogc:Literal>outputWidth</ogc:Literal>
+                            <ogc:Function name="env">
+                                <ogc:Literal>wms_width</ogc:Literal>
+                            </ogc:Function>
+                        </ogc:Function>
+                        <ogc:Function name="parameter">
+                            <ogc:Literal>outputHeight</ogc:Literal>
+                            <ogc:Function name="env">
+                                <ogc:Literal>wms_height</ogc:Literal>
+                            </ogc:Function>
+                        </ogc:Function>
+                    </ogc:Function>
+                </sld:Transformation>
+                <sld:Rule>
+                    <sld:Name>single</sld:Name>
+                    <sld:Title>1 find</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>count</ogc:PropertyName>
+                            <ogc:Literal>1</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>150000.0</sld:MinScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#1b9e77</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>8</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>small_cluster</sld:Name>
+                    <sld:Title>2-9 finds</sld:Title>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsGreaterThanOrEqualTo>
+                                <ogc:PropertyName>count</ogc:PropertyName>
+                                <ogc:Literal>2</ogc:Literal>
+                            </ogc:PropertyIsGreaterThanOrEqualTo>
+                            <ogc:PropertyIsLessThan>
+                                <ogc:PropertyName>count</ogc:PropertyName>
+                                <ogc:Literal>10</ogc:Literal>
+                            </ogc:PropertyIsLessThan>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>150000.0</sld:MinScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#1b9e77</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>16</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                    <sld:TextSymbolizer>
+                        <sld:Label>
+                            <ogc:PropertyName>count</ogc:PropertyName>
+                        </sld:Label>
+                        <sld:Font>
+                            <sld:CssParameter name="font-family">Arial</sld:CssParameter>
+                            <sld:CssParameter name="font-size">10</sld:CssParameter>
+                            <sld:CssParameter name="font-style">normal</sld:CssParameter>
+                            <sld:CssParameter name="font-weight">bold</sld:CssParameter>
+                        </sld:Font>
+                        <sld:LabelPlacement>
+                            <sld:PointPlacement>
+                                <sld:AnchorPoint>
+                                    <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                                    <sld:AnchorPointY>0.5</sld:AnchorPointY>
+                                </sld:AnchorPoint>
+                            </sld:PointPlacement>
+                        </sld:LabelPlacement>
+                        <sld:Fill>
+                            <sld:CssParameter name="fill">#ffffff</sld:CssParameter>
+                        </sld:Fill>
+                        <sld:VendorOption name="graphic-resize">stretch</sld:VendorOption>
+                    </sld:TextSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>large_cluster</sld:Name>
+                    <sld:Title>10+ finds</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsGreaterThanOrEqualTo>
+                            <ogc:PropertyName>count</ogc:PropertyName>
+                            <ogc:Literal>10</ogc:Literal>
+                        </ogc:PropertyIsGreaterThanOrEqualTo>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>150000.0</sld:MinScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#1b9e77</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>26</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                    <sld:TextSymbolizer>
+                        <sld:Label>
+                            <ogc:PropertyName>count</ogc:PropertyName>
+                        </sld:Label>
+                        <sld:Font>
+                            <sld:CssParameter name="font-family">Arial</sld:CssParameter>
+                            <sld:CssParameter name="font-size">12</sld:CssParameter>
+                            <sld:CssParameter name="font-style">normal</sld:CssParameter>
+                            <sld:CssParameter name="font-weight">bold</sld:CssParameter>
+                        </sld:Font>
+                        <sld:LabelPlacement>
+                            <sld:PointPlacement>
+                                <sld:AnchorPoint>
+                                    <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                                    <sld:AnchorPointY>0.5</sld:AnchorPointY>
+                                </sld:AnchorPoint>
+                            </sld:PointPlacement>
+                        </sld:LabelPlacement>
+                        <sld:Fill>
+                            <sld:CssParameter name="fill">#ffffff</sld:CssParameter>
+                        </sld:Fill>
+                    </sld:TextSymbolizer>
+                </sld:Rule>
+            </sld:FeatureTypeStyle>
+            <sld:FeatureTypeStyle>
+                <sld:Name>name</sld:Name>
+                <sld:Rule>
+                    <sld:Name>Amber artefact</sld:Name>
+                    <sld:Title>Amber artefact</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber artefact</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#90dddf</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber bead</sld:Name>
+                    <sld:Title>Amber bead</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber bead</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#f4b5d8</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber button</sld:Name>
+                    <sld:Title>Amber button</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber button</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#f5ee81</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber disc</sld:Name>
+                    <sld:Title>Amber disc</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber disc</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#c4a0fc</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber pendant</sld:Name>
+                    <sld:Title>Amber pendant</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber pendant</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#5d8ee1</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber piece</sld:Name>
+                    <sld:Title>Amber piece</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber piece</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#6450a7</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Amber ring</sld:Name>
+                    <sld:Title>Amber ring</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Amber ring</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#f49536</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Anthropomorphic or zoomorphic amber artefact</sld:Name>
+                    <sld:Title>Anthropomorphic or zoomorphic amber artefact</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Anthropomorphic or zoomorphic amber artefact</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#ed817d</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <sld:Name>Tubular amber bead</sld:Name>
+                    <sld:Title>Tubular amber bead</sld:Title>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>type</ogc:PropertyName>
+                            <ogc:Literal>Tubular amber bead</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>150000.0</sld:MaxScaleDenominator>
+                    <sld:PointSymbolizer>
+                        <sld:Graphic>
+                            <sld:Mark>
+                                <sld:WellKnownName>circle</sld:WellKnownName>
+                                <sld:Fill>
+                                    <sld:CssParameter name="fill">#e5c8a3</sld:CssParameter>
+                                </sld:Fill>
+                                <sld:Stroke>
+                                    <sld:CssParameter name="stroke">#232323</sld:CssParameter>
+                                    <sld:CssParameter name="stroke-width">0.5</sld:CssParameter>
+                                </sld:Stroke>
+                            </sld:Mark>
+                            <sld:Size>7</sld:Size>
+                        </sld:Graphic>
+                    </sld:PointSymbolizer>
+                </sld:Rule>
+            </sld:FeatureTypeStyle>
+        <sld:FeatureTypeStyle>
+        <sld:Name>photos</sld:Name>
+        <sld:Rule>
+          <sld:Name>Photograph</sld:Name>
+          <sld:MaxScaleDenominator>650000</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer>
+            <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">SansSerif</sld:CssParameter>
+              <sld:CssParameter name="font-size">9</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement><sld:PointPlacement><sld:AnchorPoint><sld:AnchorPointX>0.5</sld:AnchorPointX><sld:AnchorPointY>0.5</sld:AnchorPointY></sld:AnchorPoint></sld:PointPlacement></sld:LabelPlacement>
+                        <sld:Fill><sld:CssParameter name="fill">#222222</sld:CssParameter></sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="aada_cards/${strToUpperCase(collection)}_${numberFormat('0',parseDouble(main_numbe))}_${numberFormat('0',parseDouble(subnumber))}.jpg"/>
+                <sld:Format>image/jpeg</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:Mark>
+                <sld:WellKnownName>circle</sld:WellKnownName>
+                <sld:Fill><sld:CssParameter name="fill-opacity">0</sld:CssParameter></sld:Fill>
+                <sld:Stroke><sld:CssParameter name="stroke-opacity">0</sld:CssParameter></sld:Stroke>
+              </sld:Mark>
+                          </sld:Graphic>
+            <sld:Priority><ogc:Function name="if_then_else"><ogc:Function name="equalTo"><ogc:PropertyName>undamaged</ogc:PropertyName><ogc:Literal>1</ogc:Literal></ogc:Function><ogc:Literal>1000</ogc:Literal><ogc:Literal>100</ogc:Literal></ogc:Function></sld:Priority>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">3</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+    </sld:UserStyle>
+  </sld:NamedLayer>
+</sld:StyledLayerDescriptor>

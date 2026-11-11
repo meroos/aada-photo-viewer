@@ -1,0 +1,269 @@
+[
+ {
+  "pk": "993",
+  "alternate": "geonode:aada_ia_clay",
+  "orig_style": "AADA_IA_clay_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 25972,
+  "new_style": "AADA_IA_clay_artefacts_photos"
+ },
+ {
+  "pk": "992",
+  "alternate": "geonode:aada_ia_pottery_detailed",
+  "orig_style": "AADA_IA_pottery_detailed",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [],
+  "has_stacker": true,
+  "len": 13158,
+  "new_style": "AADA_IA_pottery_detailed_photos"
+ },
+ {
+  "pk": "990",
+  "alternate": "geonode:aada_ia_silver",
+  "orig_style": "AADA_IA_silver_gold_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 22433,
+  "new_style": "AADA_IA_silver_gold_artefacts_photos"
+ },
+ {
+  "pk": "989",
+  "alternate": "geonode:aada_ia_beads",
+  "orig_style": "AADA_IA_beads",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 22459,
+  "new_style": "AADA_IA_beads_photos"
+ },
+ {
+  "pk": "988",
+  "alternate": "geonode:aada_ia_iron",
+  "orig_style": "AADA_IA_iron_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 22454,
+  "new_style": "AADA_IA_iron_artefacts_photos"
+ },
+ {
+  "pk": "987",
+  "alternate": "geonode:aada_ia_bronze",
+  "orig_style": "AADA_IA_bronze_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 25875,
+  "new_style": "AADA_IA_bronze_artefacts_photos"
+ },
+ {
+  "pk": "986",
+  "alternate": "geonode:aada_ia_bone",
+  "orig_style": "AADA_IA_bone_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 22498,
+  "new_style": "AADA_IA_bone_artefacts_photos"
+ },
+ {
+  "pk": "606",
+  "alternate": "geonode:iron_age_stone_tools_artefacts",
+  "orig_style": "IA_stone_tools_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "sub_number",
+  "frag": [
+   "undamaged"
+  ],
+  "has_stacker": true,
+  "len": 13162,
+  "new_style": "IA_stone_tools_artefacts_photos"
+ },
+ {
+  "pk": "790",
+  "alternate": "geonode:bronze_age_stone_tools_artefactsc6b9730e7e4e",
+  "orig_style": "BA_stone_tools_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "sub_number",
+  "frag": [
+   "undamaged"
+  ],
+  "has_stacker": true,
+  "len": 14533,
+  "new_style": "BA_stone_tools_artefacts_photos"
+ },
+ {
+  "pk": "792",
+  "alternate": "geonode:bronze_age_bone_artefacts_4f111719bfa01539b7fa6ce289d1e96a",
+  "orig_style": "BA_bone_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 11754,
+  "new_style": "BA_bone_artefacts_photos"
+ },
+ {
+  "pk": "791",
+  "alternate": "geonode:bronze_age_clay_artefacts_ca91bd4c705a028b8a9e03086a39aa27",
+  "orig_style": "BA_clay_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 11736,
+  "new_style": "BA_clay_artefacts_photos"
+ },
+ {
+  "pk": "771",
+  "alternate": "geonode:bronze_age_bronze_artefacts",
+  "orig_style": "BA_bronze_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 27020,
+  "new_style": "BA_bronze_artefacts_photos"
+ },
+ {
+  "pk": "994",
+  "alternate": "geonode:aada_sa_wooden",
+  "orig_style": "AADA_SA_wooden_artefacts",
+  "n_userstyles": 1,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [],
+  "has_stacker": true,
+  "len": 22468,
+  "new_style": "AADA_SA_wooden_artefacts_photos"
+ },
+ {
+  "pk": "979",
+  "alternate": "geonode:aada_stone_artefacts_stone_age",
+  "orig_style": "SA_stonetools_artefacts",
+  "n_userstyles": 3,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [
+   "fragment_length_mm"
+  ],
+  "has_stacker": true,
+  "len": 31272,
+  "new_style": "SA_stonetools_artefacts_photos"
+ },
+ {
+  "pk": "978",
+  "alternate": "geonode:aada_pottery_stone_age",
+  "orig_style": "SA_pottery_artefacts",
+  "n_userstyles": 2,
+  "main": "main_number",
+  "sub": "subnumber",
+  "frag": [],
+  "has_stacker": true,
+  "len": 31287,
+  "new_style": "SA_pottery_artefacts_photos"
+ },
+ {
+  "pk": "796",
+  "alternate": "geonode:stone_age_birchbark_artefacts_6194780d4f69a06df079d1e3a38e2e68",
+  "orig_style": "SA_birchbark_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 13145,
+  "new_style": "SA_birchbark_artefacts_photos"
+ },
+ {
+  "pk": "797",
+  "alternate": "geonode:stone_age_bone_artefacts_19711993cd6dc79588a1e87efde785c3",
+  "orig_style": "SA_bone_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 29685,
+  "new_style": "SA_bone_artefacts_photos"
+ },
+ {
+  "pk": "800",
+  "alternate": "geonode:stone_age_clay_artefacts_14e7bfc6c9b1c43dc54cb1ed71365310",
+  "orig_style": "SA_clay_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 13131,
+  "new_style": "SA_clay_artefacts_photos"
+ },
+ {
+  "pk": "795",
+  "alternate": "geonode:stone_age_amber_artefacts_190ad0161c981bc9ce4a55730efe29a6",
+  "orig_style": "SA_amber_artefacts",
+  "n_userstyles": 2,
+  "main": "main_numbe",
+  "sub": "subnumber",
+  "frag": [
+   "undamaged",
+   "fragment_l"
+  ],
+  "has_stacker": true,
+  "len": 21493,
+  "new_style": "SA_amber_artefacts_photos"
+ }
+]

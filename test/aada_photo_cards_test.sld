@@ -93,7 +93,9 @@
                         </sld:Graphic>
                     </sld:PointSymbolizer>
                     <sld:TextSymbolizer>
-                        <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
+                        <sld:Label>
+                            <ogc:PropertyName>count</ogc:PropertyName>
+                        </sld:Label>
                         <sld:Font>
                             <sld:CssParameter name="font-family">Arial</sld:CssParameter>
                             <sld:CssParameter name="font-size">10</sld:CssParameter>
@@ -588,11 +590,7 @@
           <sld:Name>Photograph</sld:Name>
           <sld:MaxScaleDenominator>600000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>
-            <sld:Label><ogc:Literal><![CDATA[
-
-
-
-]]></ogc:Literal><ogc:Function name="if_then_else"><ogc:Function name="isNull"><ogc:PropertyName>subtype</ogc:PropertyName></ogc:Function><ogc:PropertyName>type</ogc:PropertyName><ogc:PropertyName>subtype</ogc:PropertyName></ogc:Function></sld:Label>
+            <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">SansSerif</sld:CssParameter>
               <sld:CssParameter name="font-size">9</sld:CssParameter>

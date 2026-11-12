@@ -276,6 +276,7 @@
             <sld:Priority><ogc:Literal>500</ogc:Literal></sld:Priority>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="spaceAround">3</sld:VendorOption>
+            <sld:VendorOption name="partials">true</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
         <sld:Rule>
@@ -303,6 +304,7 @@
             <sld:Priority><ogc:Literal>500</ogc:Literal></sld:Priority>
             <sld:VendorOption name="conflictResolution">false</sld:VendorOption>
             <sld:VendorOption name="spaceAround">3</sld:VendorOption>
+            <sld:VendorOption name="partials">true</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
       </sld:FeatureTypeStyle>

@@ -8,6 +8,7 @@
         <sld:Name>photos</sld:Name>
         <sld:Rule>
           <sld:Name>Photograph (selection)</sld:Name>
+          <ogc:Filter><ogc:PropertyIsGreaterThanOrEqualTo><ogc:Function name="strIndexOf"><ogc:Literal>|KM_19133_33|KM_22964_24|KM_23619_1|KM_23629_1|KM_6503_19|</ogc:Literal><ogc:Function name="Concatenate"><ogc:Literal>|</ogc:Literal><ogc:Function name="strToUpperCase"><ogc:PropertyName>collection</ogc:PropertyName></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>main_number</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>subnumber</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>|</ogc:Literal></ogc:Function></ogc:Function><ogc:Literal>0</ogc:Literal></ogc:PropertyIsGreaterThanOrEqualTo></ogc:Filter>
           <sld:MinScaleDenominator>100000</sld:MinScaleDenominator>
           <sld:MaxScaleDenominator>2600000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>

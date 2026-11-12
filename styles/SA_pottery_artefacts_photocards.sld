@@ -8,6 +8,7 @@
         <sld:Name>photos</sld:Name>
         <sld:Rule>
           <sld:Name>Photograph (selection)</sld:Name>
+          <ogc:Filter><ogc:PropertyIsGreaterThanOrEqualTo><ogc:Function name="strIndexOf"><ogc:Literal>|KM_10277_0|KM_11149_0|KM_11792_0|KM_12565_0|KM_12720_0|KM_15324_0|KM_15586_0|KM_16421_0|KM_17368_0|KM_22032_0|KM_22796_0|KM_27586_0|KM_27732_0|KM_28654_0|KM_28767_0|KM_29631_0|KM_33383_0|KM_6500_1|KM_6625_3|KM_6670_3|KM_6670_4|KM_8696_3|KM_8737_0|KM_8745_13|KM_8994_0|KM_9643_0|SATM_17162_0|TMM_13692_1|TMM_18315_2|TMM_18315_3|TMM_18315_4|TYA_137_0|ÅM_154_0|ÅM_238_0|ÅM_322_0|</ogc:Literal><ogc:Function name="Concatenate"><ogc:Literal>|</ogc:Literal><ogc:Function name="strToUpperCase"><ogc:PropertyName>collection</ogc:PropertyName></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>main_number</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>subnumber</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>|</ogc:Literal></ogc:Function></ogc:Function><ogc:Literal>0</ogc:Literal></ogc:PropertyIsGreaterThanOrEqualTo></ogc:Filter>
           <sld:MinScaleDenominator>100000</sld:MinScaleDenominator>
           <sld:MaxScaleDenominator>2600000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>

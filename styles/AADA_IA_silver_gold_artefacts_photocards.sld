@@ -8,6 +8,7 @@
         <sld:Name>photos</sld:Name>
         <sld:Rule>
           <sld:Name>Photograph (selection)</sld:Name>
+          <ogc:Filter><ogc:PropertyIsGreaterThanOrEqualTo><ogc:Function name="strIndexOf"><ogc:Literal>|KM_15140_1|KM_15140_10|KM_15189_121|KM_15189_143|KM_15499_1|KM_16284_1|KM_16284_3|KM_16284_4|KM_17181_26|KM_17208_510|KM_19000_2423|KM_19000_44|KM_23183_29|</ogc:Literal><ogc:Function name="Concatenate"><ogc:Literal>|</ogc:Literal><ogc:Function name="strToUpperCase"><ogc:PropertyName>collection</ogc:PropertyName></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>main_number</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>subnumber</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>|</ogc:Literal></ogc:Function></ogc:Function><ogc:Literal>0</ogc:Literal></ogc:PropertyIsGreaterThanOrEqualTo></ogc:Filter>
           <sld:MinScaleDenominator>100000</sld:MinScaleDenominator>
           <sld:MaxScaleDenominator>2600000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>

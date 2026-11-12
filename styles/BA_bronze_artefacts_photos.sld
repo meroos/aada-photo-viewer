@@ -535,6 +535,7 @@
             <sld:Priority><ogc:Function name="if_then_else"><ogc:Function name="equalTo"><ogc:PropertyName>undamaged</ogc:PropertyName><ogc:Literal>1</ogc:Literal></ogc:Function><ogc:Literal>1000</ogc:Literal><ogc:Literal>100</ogc:Literal></ogc:Function></sld:Priority>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="spaceAround">3</sld:VendorOption>
+            <sld:VendorOption name="partials">true</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
         <sld:Rule>
@@ -562,6 +563,7 @@
             <sld:Priority><ogc:Function name="if_then_else"><ogc:Function name="equalTo"><ogc:PropertyName>undamaged</ogc:PropertyName><ogc:Literal>1</ogc:Literal></ogc:Function><ogc:Literal>1000</ogc:Literal><ogc:Literal>100</ogc:Literal></ogc:Function></sld:Priority>
             <sld:VendorOption name="conflictResolution">false</sld:VendorOption>
             <sld:VendorOption name="spaceAround">3</sld:VendorOption>
+            <sld:VendorOption name="partials">true</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
       </sld:FeatureTypeStyle>

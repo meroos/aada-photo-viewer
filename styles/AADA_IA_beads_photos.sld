@@ -458,6 +458,7 @@
         </sld:Rule>
         <sld:Rule>
           <sld:Name>Photograph (all)</sld:Name>
+          <ogc:Filter><ogc:PropertyIsGreaterThanOrEqualTo><ogc:Function name="strIndexOf"><ogc:Literal>|KM_14169_6|KM_16575_33|KM_18917_1184|KM_18917_1399|KM_19000_8372|KM_20450_24|KM_21967_1|KM_23085_14|KM_23085_8|KM_23191_1|KM_23274_114|KM_23274_130|KM_23274_288|KM_23314_21|KM_23574_3|KM_23602_1|KM_23602_15|KM_23602_2|KM_23815_171|KM_6645_17|KM_6746_77|TYA_180_24|TYA_233_57|TYA_454_244|TYA_544_224|TYA_546_11|TYA_592_9|TYA_597_371|</ogc:Literal><ogc:Function name="Concatenate"><ogc:Literal>|</ogc:Literal><ogc:Function name="strToUpperCase"><ogc:PropertyName>collection</ogc:PropertyName></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>main_number</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>_</ogc:Literal><ogc:Function name="numberFormat"><ogc:Literal>0</ogc:Literal><ogc:Function name="parseDouble"><ogc:PropertyName>subnumber</ogc:PropertyName></ogc:Function></ogc:Function><ogc:Literal>|</ogc:Literal></ogc:Function></ogc:Function><ogc:Literal>0</ogc:Literal></ogc:PropertyIsGreaterThanOrEqualTo></ogc:Filter>
           <sld:MaxScaleDenominator>100000</sld:MaxScaleDenominator>
           <sld:TextSymbolizer>
             <sld:Label><ogc:Literal> </ogc:Literal></sld:Label>
